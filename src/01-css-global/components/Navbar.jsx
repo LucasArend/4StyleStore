@@ -1,34 +1,31 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FiMoon, FiShoppingCart, FiChevronDown } from "react-icons/fi";
+import { useState } from "react";
 import "./../css/navbar.css";
 
-function Navbar() {
+export default function NavbarGlobal() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="navbar">
-      {/* Dropdown */}
+    <nav className="navbar-global">
       <div className="left" onClick={() => setOpen(!open)}>
         CSS GLOBAL <FiChevronDown />
         {open && (
           <div className="dropdown">
             <ul>
-              <li><Link to="/modules">CSS Modules</Link></li>
-              <li><Link to="/tailwind">TailwindCSS</Link></li>
-              <li><Link to="/styled">Styled Components</Link></li>
+              <li><NavLink to="/modules/produtos">CSS Modules</NavLink></li>
+              <li><NavLink to="/tailwind/produtos">TailwindCSS</NavLink></li>
+              <li><NavLink to="/styled/produtos">Styled Components</NavLink></li>
             </ul>
           </div>
         )}
       </div>
 
-      {/* Links centrais */}
       <div className="center">
-        <a href="#">Produtos</a>
-        <a href="#">Promoção</a>
+        <NavLink to="/global/produtos">Produtos</NavLink>
+        <NavLink to="/global/promocao">Promoção</NavLink>
       </div>
 
-      {/* Ícones */}
       <div className="right">
         <FiMoon />
         <FiShoppingCart />
@@ -36,5 +33,3 @@ function Navbar() {
     </nav>
   );
 }
-
-export default Navbar;

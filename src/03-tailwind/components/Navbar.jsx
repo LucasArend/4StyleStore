@@ -1,43 +1,42 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FiMoon, FiShoppingCart, FiChevronDown } from "react-icons/fi";
+import { useState } from "react";
 
-function Navbar() {
+export default function NavbarTailwind() {
   const [open, setOpen] = useState(false);
 
-  return (
-    <nav className="flex justify-between items-center p-4 bg-emerald-600 text-white relative">
-      {/* Dropdown */}
-      <div className="relative">
-        <button
-          onClick={() => setOpen(!open)}
-          className="flex items-center gap-1 font-bold"
-        >
-          TAILWINDCSS <FiChevronDown />
-        </button>
+  const linkClass = ({ isActive }) =>
+    `relative pb-2 transition-colors ${
+      isActive ? "text-white" : "text-indigo-200 hover:text-white"
+    }`;
 
+  return (
+    <nav className="bg-indigo-600 text-white px-6 py-3 flex justify-between items-center">
+      {/* Esquerda */}
+      <div className="relative cursor-pointer" onClick={() => setOpen(!open)}>
+        TAILWIND <FiChevronDown className="inline ml-1" />
         {open && (
-          <ul className="absolute left-0 mt-2 bg-white text-black shadow-lg rounded w-40">
-            <li><Link to="/global" className="block px-4 py-2 hover:bg-gray-100">CSS Global</Link></li>
-            <li><Link to="/modules" className="block px-4 py-2 hover:bg-gray-100">CSS Modules</Link></li>
-            <li><Link to="/styled" className="block px-4 py-2 hover:bg-gray-100">Styled Components</Link></li>
-          </ul>
+          <div className="absolute mt-2 bg-white text-indigo-600 rounded shadow p-2">
+            <ul>
+              <li><NavLink to="/global/produtos">CSS Global</NavLink></li>
+              <li><NavLink to="/modules/produtos">CSS Modules</NavLink></li>
+              <li><NavLink to="/styled/produtos">Styled Components</NavLink></li>
+            </ul>
+          </div>
         )}
       </div>
 
-      {/* Links centrais */}
+      {/* Centro */}
       <div className="flex gap-6">
-        <a href="#" className="hover:underline">Produtos</a>
-        <a href="#" className="hover:underline">Promoção</a>
+        <NavLink to="/tailwind/produtos" className={linkClass}>Produtos</NavLink>
+        <NavLink to="/tailwind/promocao" className={linkClass}>Promoção</NavLink>
       </div>
 
-      {/* Ícones */}
-      <div className="flex gap-4 text-lg cursor-pointer">
+      {/* Direita */}
+      <div className="flex gap-4">
         <FiMoon />
         <FiShoppingCart />
       </div>
     </nav>
   );
 }
-
-export default Navbar;

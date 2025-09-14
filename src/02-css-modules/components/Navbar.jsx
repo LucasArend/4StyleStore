@@ -1,34 +1,31 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FiMoon, FiShoppingCart, FiChevronDown } from "react-icons/fi";
-import styles from "./../css/navbar.module.css";
+import { useState } from "react";
+import styles from "./../css/Navbar.module.css";
 
-function Navbar() {
+export default function NavbarModules() {
   const [open, setOpen] = useState(false);
 
   return (
     <nav className={styles.navbar}>
-      {/* Dropdown */}
       <div className={styles.left} onClick={() => setOpen(!open)}>
         CSS MODULES <FiChevronDown />
         {open && (
           <div className={styles.dropdown}>
             <ul>
-              <li><Link to="/global">CSS Global</Link></li>
-              <li><Link to="/tailwind">TailwindCSS</Link></li>
-              <li><Link to="/styled">Styled Components</Link></li>
+              <li><NavLink to="/global/produtos">CSS Global</NavLink></li>
+              <li><NavLink to="/tailwind/produtos">TailwindCSS</NavLink></li>
+              <li><NavLink to="/styled/produtos">Styled Components</NavLink></li>
             </ul>
           </div>
         )}
       </div>
 
-      {/* Links centrais */}
       <div className={styles.center}>
-        <a href="#">Produtos</a>
-        <a href="#">Promoção</a>
+        <NavLink to="/modules/produtos">Produtos</NavLink>
+        <NavLink to="/modules/promocao">Promoção</NavLink>
       </div>
 
-      {/* Ícones */}
       <div className={styles.right}>
         <FiMoon />
         <FiShoppingCart />
@@ -36,5 +33,3 @@ function Navbar() {
     </nav>
   );
 }
-
-export default Navbar;
