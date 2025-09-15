@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom";
-import { FiMoon, FiShoppingCart, FiChevronDown } from "react-icons/fi";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { FiMoon, FiShoppingCart, FiChevronDown } from "react-icons/fi";
 import "./../css/navbar.css";
 
-export default function NavbarGlobal() {
+function NavbarGlobal() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -13,19 +13,17 @@ export default function NavbarGlobal() {
         {open && (
           <div className="dropdown">
             <ul>
-              <li><NavLink to="/modules/produtos">CSS Modules</NavLink></li>
-              <li><NavLink to="/tailwind/produtos">TailwindCSS</NavLink></li>
-              <li><NavLink to="/styled/produtos">Styled Components</NavLink></li>
+              <li><Link to="/modules">CSS Modules</Link></li>
+              <li><Link to="/tailwind">TailwindCSS</Link></li>
+              <li><Link to="/styled">Styled Components</Link></li>
             </ul>
           </div>
         )}
       </div>
-
       <div className="center">
-        <NavLink to="/global/produtos">Produtos</NavLink>
-        <NavLink to="/global/promocao">Promoção</NavLink>
+        <Link to="/global/produtos">Produtos</Link>
+        <Link to="/global/promocao">Promoção</Link>
       </div>
-
       <div className="right">
         <FiMoon />
         <FiShoppingCart />
@@ -33,3 +31,5 @@ export default function NavbarGlobal() {
     </nav>
   );
 }
+
+export default NavbarGlobal;

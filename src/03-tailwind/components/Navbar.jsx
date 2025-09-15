@@ -1,42 +1,56 @@
-import { NavLink } from "react-router-dom";
-import { FiMoon, FiShoppingCart, FiChevronDown } from "react-icons/fi";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import { FiMoon, FiSun, FiShoppingCart, FiChevronDown } from "react-icons/fi";
+import { ThemeContext } from "../../context/ThemeContext";
 
-export default function NavbarTailwind() {
+function NavbarTailwind({ onCartClick, cartCount }) {
   const [open, setOpen] = useState(false);
-
-  const linkClass = ({ isActive }) =>
-    `relative pb-2 transition-colors ${
-      isActive ? "text-white" : "text-indigo-200 hover:text-white"
-    }`;
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <nav className="bg-indigo-600 text-white px-6 py-3 flex justify-between items-center">
-      {/* Esquerda */}
+    <nav className="bg-indigo-600 dark:bg-gray-900 text-white px-6 py-3 flex items-center justify-between">
+      {/* Left - Dropdown */}
       <div className="relative cursor-pointer" onClick={() => setOpen(!open)}>
-        TAILWIND <FiChevronDown className="inline ml-1" />
+        <span className="flex items-center gap-1 font-semibold">
+          TailwindCSS <FiChevronDown />
+        </span>
         {open && (
-          <div className="absolute mt-2 bg-white text-indigo-600 rounded shadow p-2">
+          <div className="absolute mt-2 bg-white text-black rounded shadow w-40">
             <ul>
-              <li><NavLink to="/global/produtos">CSS Global</NavLink></li>
-              <li><NavLink to="/modules/produtos">CSS Modules</NavLink></li>
-              <li><NavLink to="/styled/produtos">Styled Components</NavLink></li>
+              <li><Link to="/modules" className="block px-4 py-2 hover:bg-indigo-100">CSS Modules</Link></li>
+              <li><Link to="/global" className="block px-4 py-2 hover:bg-indigo-100">CSS Global</Link></li>
+              <li><Link to="/styled" className="block px-4 py-2 hover:bg-indigo-100">Styled Components</Link></li>
             </ul>
           </div>
         )}
       </div>
 
-      {/* Centro */}
+      {/* Center - Links */}
       <div className="flex gap-6">
-        <NavLink to="/tailwind/produtos" className={linkClass}>Produtos</NavLink>
-        <NavLink to="/tailwind/promocao" className={linkClass}>Promoção</NavLink>
+        <Link to="/tailwind/produtos" className="relative hover:after:w-full after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-white after:transition-all">
+          Produtos
+        </Link>
+        <Link to="/tailwind/promocao" className="relative hover:after:w-full after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-white after:transition-all">
+          Promoção
+        </Link>
       </div>
 
-      {/* Direita */}
-      <div className="flex gap-4">
-        <FiMoon />
-        <FiShoppingCart />
+      {/* Right - Icons */}
+      <div className="flex gap-4 text-lg cursor-pointer">
+        <div onClick={toggleTheme}>
+          {isDarkMode ? <FiSun /> : <FiMoon />}
+        </div>
+        <div onClick={onCartClick} className="relative">
+          <FiShoppingCart />
+          {cartCount > 0 && (
+            <span className="absolute -top-2 -right-2 text-xs bg-red-500 text-white w-5 h-5 flex items-center justify-center rounded-full">
+              {cartCount}
+            </span>
+          )}
+        </div>
       </div>
     </nav>
   );
 }
+
+export default NavbarTailwind;

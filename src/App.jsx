@@ -5,6 +5,7 @@ import NavbarGlobal from "./01-css-global/components/Navbar";
 import NavbarModules from "./02-css-modules/components/Navbar";
 import NavbarTailwind from "./03-tailwind/components/Navbar";
 import NavbarStyled from "./04-styled-components/components/Navbar";
+import TailwindStore from "./03-tailwind/TailwindStore";
 
 // Páginas dummy
 function Produtos({ estilo }) {
@@ -15,18 +16,11 @@ function Promocao({ estilo }) {
   return <h2 style={{ padding: "20px" }}>Página de Promoção - {estilo}</h2>;
 }
 
-function Home() {
-  return <h2 style={{ padding: "20px" }}>🏠 Selecione um estilo no menu</h2>;
-}
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Página inicial */}
-        <Route path="/" element={<Home />} />
-
-        {/* CSS Global */}
         <Route
           path="/global/*"
           element={
@@ -39,8 +33,6 @@ function App() {
             </>
           }
         />
-
-        {/* CSS Modules */}
         <Route
           path="/modules/*"
           element={
@@ -53,13 +45,11 @@ function App() {
             </>
           }
         />
-
-        {/* Tailwind */}
         <Route
-          path="/tailwind/*"
+          path="/*"
           element={
             <>
-              <NavbarTailwind />
+              <TailwindStore />
               <Routes>
                 <Route path="produtos" element={<Produtos estilo="TailwindCSS" />} />
                 <Route path="promocao" element={<Promocao estilo="TailwindCSS" />} />
@@ -67,8 +57,6 @@ function App() {
             </>
           }
         />
-
-        {/* Styled Components */}
         <Route
           path="/styled/*"
           element={
