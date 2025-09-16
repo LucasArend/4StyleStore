@@ -1,10 +1,72 @@
 .card {
-  background: #bbf7d0;
-  border: 1px solid #4ade80;
+  border: 2px solid transparent;
+  background-color: white;
   border-radius: 8px;
   padding: 16px;
-  transition: 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, border-color 0.3s ease;
+  cursor: pointer;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
 }
+
 .card:hover {
-  background: #86efac;
+  transform: translateY(-4px);
+  border-color: #6366f1; /* indigo-500 */
+}
+
+.image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937; /* gray-800 */
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #1a53c4; /* indigo-600 */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  background-color: #00349b;
+  cursor: pointer;
+}
+
+.inCart {
+  border-color: #1f56c4; /* emerald-500 */
+}
+
+.removeButton {
+  background-color: #9b2d2d; /* vermelho-500 */
+}
+
+.removeButton:hover {
+  background-color: rgb(179, 26, 26); /* vermelho-600 */
+}
+
+/* Modo escuro ajustado */
+:global(.dark) .card {
+  background-color: #1f2937;
+  border-color: #374151;
+}
+
+:global(.dark) .title {
+  color: #f9fafb;
 }

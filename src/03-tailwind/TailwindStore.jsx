@@ -1,5 +1,5 @@
 import { useState } from "react";
-import NavBar from "./components/Navbar";
+import NavbarTailwind from "./components/Navbar";
 import ProductCard from "./components/ProductCard";
 
 const products = [
@@ -11,14 +11,14 @@ const products = [
   { id: 6, title: "Produto 6", image: "https://via.placeholder.com/300x200" },
 ];
 
-function TailwindStore() {
+function TailwindStore({ onNavigate }) {
   const [cart, setCart] = useState([]);
   const [showCartOnly, setShowCartOnly] = useState(false);
 
   const toggleCartProduct = (product) => {
-    const isInCart = cart.some(item => item.id === product.id);
+    const isInCart = cart.some((item) => item.id === product.id);
     if (isInCart) {
-      setCart(cart.filter(item => item.id !== product.id));
+      setCart(cart.filter((item) => item.id !== product.id));
     } else {
       setCart([...cart, product]);
     }
@@ -29,12 +29,16 @@ function TailwindStore() {
   };
 
   const displayedProducts = showCartOnly
-    ? products.filter(p => cart.find(item => item.id === p.id))
+    ? products.filter((p) => cart.find((item) => item.id === p.id))
     : products;
 
   return (
     <>
-      <NavBar onCartClick={handleCartClick} cartCount={cart.length} />
+      <NavbarTailwind
+        onCartClick={handleCartClick}
+        cartCount={cart.length}
+        onNavigate={onNavigate}
+      />
       <main className="p-6 bg-gray-100 dark:bg-gray-900 min-h-screen">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
@@ -45,13 +49,13 @@ function TailwindStore() {
           <p className="text-red-500">Nenhum item no carrinho.</p>
         )}
 
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 dark:text-gray-100">
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {displayedProducts.map((product) => (
             <ProductCard
               key={product.id}
               title={product.title}
               image={product.image}
-              inCart={cart.some(item => item.id === product.id)}
+              inCart={cart.some((item) => item.id === product.id)}
               onToggleCart={() => toggleCartProduct(product)}
             />
           ))}

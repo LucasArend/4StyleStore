@@ -1,61 +1,94 @@
 .navbar {
-  background: #4ade80; /* verde claro */
-  padding: 12px 24px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  color: white;
+  justify-content: space-between;
+  padding: 16px 24px;
+  position: relative;
+  flex-wrap: wrap;
 }
 
 .left {
-  cursor: pointer;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  flex: 1;
 }
 
-.center a {
-  margin: 0 12px;
-  text-decoration: none;
-  color: white;
+.brand {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.actions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  align-items: center;
+}
+
+.link {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: inherit;
   position: relative;
 }
 
-.center a:hover::after {
+.link::after {
   content: "";
   position: absolute;
-  width: 100%;
+  width: 0%;
   height: 2px;
-  left: 0;
   bottom: -4px;
-  background: white;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
 }
 
-.right {
+.link:hover::after {
+  width: 100%;
+}
+
+.menuIcon {
+  display: none;
+}
+
+.mobileMenu {
   display: flex;
+  flex-direction: column;
   gap: 12px;
-}
-
-.dropdown {
+  background-color: #4f46e5;
+  padding: 16px;
   position: absolute;
-  background: white;
-  color: black;
-  margin-top: 8px;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  top: 100%;
+  left: 0;
+  width: 100%;
 }
 
-.dropdown ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+@media (max-width: 768px) {
+  .center {
+    display: none;
+  }
+
+  .menuIcon {
+    display: block;
+  }
 }
 
-.dropdown li {
-  padding: 8px 12px;
+/* Tema claro */
+.light {
+  background-color: #e5e7eb;
+  color: #111827;
 }
 
-.dropdown li:hover {
-  background: #bbf7d0; /* verde mais claro */
+.dark {
+  background-color: #1f2937;
+  color: white;
 }

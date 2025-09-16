@@ -1,95 +1,160 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { FiMoon, FiShoppingCart, FiChevronDown } from "react-icons/fi";
+import { useState, useContext } from "react";
+import { FiMoon, FiSun, FiShoppingCart, FiMenu, FiX } from "react-icons/fi";
+import { ThemeContext } from "../../context/ThemeContext";
 import styled from "styled-components";
 
 const Nav = styled.nav`
-  background: #9ca3af; /* cinza */
-  padding: 12px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background-color: ${({ isDarkMode }) => (isDarkMode ? "#1f2937" : "#4f46e5")};
   color: white;
-`;
-
-const Left = styled.div`
-  font-weight: bold;
-  cursor: pointer;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  height: 64px;
   position: relative;
 `;
 
-const Center = styled.div`
-  a {
-    margin: 0 12px;
-    text-decoration: none;
-    color: white;
-    position: relative;
-
-    &:hover::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      left: 0;
-      bottom: -4px;
-      background: white;
-    }
-  }
+const Title = styled.div`
+  flex: 1;
+  font-weight: bold;
+  font-size: 1.2rem;
 `;
 
-const Right = styled.div`
+const Links = styled.div`
+  flex: 2;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+
+  @media (max-width: 768px) {
+    display: none; /* Esconde links em telas pequenas */
+  }
+`;
+
+const LinkButton = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+`;
+
+const Actions = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 120px; /* garante espaço mesmo quando menu escondido */
+  gap: 16px;
+`;
+
+const IconButton = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+`;
+
+// MenuIcon só aparece em telas pequenas
+const MenuIcon = styled(IconButton)`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+
+const MobileMenu = styled.div`
+  display: flex;
+  flex-direction: column;
   gap: 12px;
-`;
-
-const Dropdown = styled.div`
+  background-color: #4f46e5;
+  padding: 16px;
   position: absolute;
-  background: white;
-  color: black;
-  margin-top: 8px;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  li {
-    padding: 8px 12px;
-  }
-  li:hover {
-    background: #d1d5db;
-  }
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 10;
 `;
 
-function NavbarStyled() {
-  const [open, setOpen] = useState(false);
+function NavbarStyled({ onCartClick, cartCount, onNavigate }) {
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleNav = (path) => {
+    setMenuOpen(false);
+    onNavigate(path);
+  };
 
   return (
-    <Nav>
-      <Left onClick={() => setOpen(!open)}>
-        STYLED COMPONENTS <FiChevronDown />
-        {open && (
-          <Dropdown>
-            <ul>
-              <li><Link to="/modules">CSS Modules</Link></li>
-              <li><Link to="/global">CSS Global</Link></li>
-              <li><Link to="/tailwind">TailwindCSS</Link></li>
-            </ul>
-          </Dropdown>
-        )}
-      </Left>
-      <Center>
-        <Link to="/styled/produtos">Produtos</Link>
-        <Link to="/styled/promocao">Promoção</Link>
-      </Center>
-      <Right>
-        <FiMoon />
-        <FiShoppingCart />
-      </Right>
+    <Nav isDarkMode={isDarkMode}>
+      <Title>STYLED COMPONENTS</Title>
+
+      <Links>
+        <LinkButton onClick={() => handleNav("/")}>Tailwind</LinkButton>
+        <LinkButton onClick={() => handleNav("/global")}>CSS Global</LinkButton>
+        <LinkButton onClick={() => handleNav("/modules")}>CSS Modules</LinkButton>
+        
+      </Links>
+
+      <Actions>
+        <IconButton onClick={toggleTheme}>
+          {isDarkMode ? <FiSun /> : <FiMoon />}
+        </IconButton>
+
+        <IconButton onClick={onCartClick} style={{ position: "relative" }}>
+          <FiShoppingCart />
+          {cartCount > 0 && (
+            <span
+              style={{
+                position: "absolute",
+                top: "-8px",
+                right: "-8px",
+                backgroundColor: "red",
+                color: "white",
+                fontSize: "0.7rem",
+                width: "18px",
+                height: "18px",
+                borderRadius: "9999px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {cartCount}
+            </span>
+          )}
+        </IconButton>
+
+        <MenuIcon onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <FiX /> : <FiMenu />}
+        </MenuIcon>
+      </Actions>
+
+      {menuOpen && (
+        <MobileMenu>
+          <button onClick={() => handleNav("/global")}>CSS Global</button>
+          <button onClick={() => handleNav("/modules")}>CSS Modules</button>
+          <button onClick={() => handleNav("/styled")}>Styled Components</button>
+        </MobileMenu>
+      )}
     </Nav>
   );
 }

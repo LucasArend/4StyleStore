@@ -1,23 +1,79 @@
 import styled from "styled-components";
 
 const Card = styled.div`
-  background: #e5e7eb;
-  border: 1px solid #9ca3af;
+  background: ${(props) => (props.isDarkMode ? "#1f2937" : "white")}; 
+  color: ${(props) => (props.isDarkMode ? "#d1d5db" : "#1f2937")}; 
   border-radius: 8px;
   padding: 16px;
-  margin-bottom: 8px;
-  transition: 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
 
   &:hover {
-    background: #d1d5db;
+    transform: translateY(-4px);
+    border-color: #6366f1; 
+  }
+
+  ${(props) =>
+    props.inCart &&
+    `
+    border-color: #10b981; /* emerald-500 */
+    background-color: ${props.isDarkMode ? "#064e3b" : "#ecfdf5"};
+  `}
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 12px;
+`;
+
+const Title = styled.div`
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: ${(props) => (props.isDarkMode ? "#d1d5db" : "#1f2937")};
+  margin-bottom: 8px;
+  text-align: center;
+`;
+
+const Button = styled.button`
+  width: 100%;
+  max-width: 220px; /* largura fixa aproximada para o maior texto */
+  padding: 10px;
+  background-color: ${(props) =>
+    props.inCart ? "#dc2626" : props.isDarkMode ? "#4338ca" : "#4f46e5"};
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+
+  white-space: nowrap;
+  min-height: 38px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+
+  &:hover {
+    background-color: ${(props) =>
+      props.inCart ? "#b91c1c" : props.isDarkMode ? "#3730a3" : "#4338ca"};
   }
 `;
 
-export default function ProductCard({ name, price }) {
+function ProductCard({ title, image, inCart, onToggleCart, isDarkMode }) {
   return (
-    <Card>
-      <h3>{name}</h3>
-      <p>{price}</p>
+    <Card inCart={inCart} isDarkMode={isDarkMode} onClick={onToggleCart}>
+      <Image src={image} alt={title} />
+      <Title isDarkMode={isDarkMode}>{title}</Title>
+      <Button inCart={inCart} isDarkMode={isDarkMode}>
+        {inCart ? "Remover do Carrinho" : "Adicionar ao Carrinho"}
+      </Button>
     </Card>
   );
 }
+
+export default ProductCard;

@@ -1,0 +1,58 @@
+:root {
+  --bg: #f3f4f6;
+  --text: #111827;
+  --danger: #ef4444;
+}
+
+body.dark {
+  --bg: #1f2937;
+  --text: #f9fafb;
+  --danger: #f87171;
+}
+.global-store-main {
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.global-store-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.global-store-header h2 {
+  font-size: 1.5rem;
+}
+
+.empty-cart-msg {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: var(--danger);
+}
+
+/* Grid Responsivo */
+.product-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 481px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 769px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

@@ -1,76 +1,94 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
-// Navbars
-import NavbarGlobal from "./01-css-global/components/Navbar";
-import NavbarModules from "./02-css-modules/components/Navbar";
-import NavbarTailwind from "./03-tailwind/components/Navbar";
-import NavbarStyled from "./04-styled-components/components/Navbar";
 import TailwindStore from "./03-tailwind/TailwindStore";
+import ModulesStore from "./02-css-modules/ModulesStore";
+import GlobalStore from "./01-css-global/GlobalStore";
+import StyledStore from "./04-styled-components/StyledStore";
 
-// Páginas dummy
-function Produtos({ estilo }) {
-  return <h2 style={{ padding: "20px" }}>Página de Produtos - {estilo}</h2>;
-}
+import AnimationScreen from "./global/AnimationScreen";
+import SkeletonLoader from "./global/SkeletonLoader";
 
-function Promocao({ estilo }) {
-  return <h2 style={{ padding: "20px" }}>Página de Promoção - {estilo}</h2>;
-}
-
+const messages = {
+  "/": "Transformando site para TailwindCSS!",
+  "/global": "Transformando site para CSS Global!",
+  "/modules": "Transformando site para CSS Modules!",
+  "/styled": "Transformando site para Styled Components!",
+};
 
 function App() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const [animationStage, setAnimationStage] = useState("idle"); // idle | entering | waiting | exiting
+  const [nextPath, setNextPath] = useState(null);
+  const [message, setMessage] = useState("");
+  const [showRoutes, setShowRoutes] = useState(true); // controla quando as rotas devem aparecer
+
+  const handleNavigation = (path) => {
+    if (location.pathname === path) return;
+    setMessage(messages[path] || "Carregando...");
+    setNextPath(path);
+    setAnimationStage("entering");
+    setShowRoutes(false); // esconde conteúdo original
+  };
+
+  // Entrada
+  useEffect(() => {
+    if (animationStage === "entering") {
+      const timeout = setTimeout(() => {
+        navigate(nextPath);
+        setAnimationStage("waiting");
+      }, 600);
+      return () => clearTimeout(timeout);
+    }
+  }, [animationStage, nextPath, navigate]);
+
+  // Espera após navegação
+  useEffect(() => {
+    if (animationStage === "waiting") {
+      const timeout = setTimeout(() => {
+        setAnimationStage("exiting");
+      }, 800);
+      return () => clearTimeout(timeout);
+    }
+  }, [animationStage]);
+
+  // Saída
+  useEffect(() => {
+    if (animationStage === "exiting") {
+      const timeout = setTimeout(() => {
+        setAnimationStage("idle");
+        setNextPath(null);
+        setShowRoutes(true); // mostra as rotas novamente
+      }, 500);
+      return () => clearTimeout(timeout);
+    }
+  }, [animationStage]);
+
+  const animating = animationStage !== "idle";
+
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/global/*"
-          element={
-            <>
-              <NavbarGlobal />
-              <Routes>
-                <Route path="produtos" element={<Produtos estilo="CSS Global" />} />
-                <Route path="promocao" element={<Promocao estilo="CSS Global" />} />
-              </Routes>
-            </>
-          }
+    <>
+      {animating && (
+        <AnimationScreen
+          message={message}
+          animateOut={animationStage === "exiting"}
         />
-        <Route
-          path="/modules/*"
-          element={
-            <>
-              <NavbarModules />
-              <Routes>
-                <Route path="produtos" element={<Produtos estilo="CSS Modules" />} />
-                <Route path="promocao" element={<Promocao estilo="CSS Modules" />} />
-              </Routes>
-            </>
-          }
-        />
-        <Route
-          path="/*"
-          element={
-            <>
-              <TailwindStore />
-              <Routes>
-                <Route path="produtos" element={<Produtos estilo="TailwindCSS" />} />
-                <Route path="promocao" element={<Promocao estilo="TailwindCSS" />} />
-              </Routes>
-            </>
-          }
-        />
-        <Route
-          path="/styled/*"
-          element={
-            <>
-              <NavbarStyled />
-              <Routes>
-                <Route path="produtos" element={<Produtos estilo="Styled Components" />} />
-                <Route path="promocao" element={<Promocao estilo="Styled Components" />} />
-              </Routes>
-            </>
-          }
-        />
-      </Routes>
-    </Router>
+      )}
+
+      {/* Se estiver animando, mostra o skeleton; senão, mostra a rota */}
+      {showRoutes ? (
+        <Routes location={location}>
+          <Route path="/" element={<TailwindStore onNavigate={handleNavigation} />} />
+          <Route path="/global" element={<GlobalStore onNavigate={handleNavigation} />} />
+          <Route path="/modules" element={<ModulesStore onNavigate={handleNavigation} />} />
+          <Route path="/styled" element={<StyledStore onNavigate={handleNavigation} />} />
+        </Routes>
+      ) : (
+        <SkeletonLoader />
+      )}
+    </>
   );
 }
 

@@ -1,10 +1,18 @@
-import "./../css/productCard.css";
+import "../css/ProductCard.css";
 
-export default function ProductCard({ name, price }) {
+function ProductCard({ title, image, inCart, onToggleCart }) {
   return (
-    <div className="card-global">
-      <h3>{name}</h3>
-      <p>{price}</p>
+    <div className="product-card">
+      <img src={image} alt={title} className="product-img" />
+      <h3 className="product-title">{title}</h3>
+      <button
+        className={inCart ? "remove-btn" : "buy-btn"}
+        onClick={onToggleCart}
+      >
+        {inCart ? "Remover" : "Comprar"}
+      </button>
     </div>
   );
 }
+
+export default ProductCard;

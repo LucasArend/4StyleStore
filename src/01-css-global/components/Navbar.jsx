@@ -1,35 +1,54 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { FiMoon, FiShoppingCart, FiChevronDown } from "react-icons/fi";
-import "./../css/navbar.css";
+import { useState, useContext } from "react";
+import { FiMoon, FiSun, FiShoppingCart, FiMenu, FiX } from "react-icons/fi";
+import { ThemeContext } from "../../context/ThemeContext";
+import "../css/Navbar.css";
 
-function NavbarGlobal() {
-  const [open, setOpen] = useState(false);
+function Navbar({ onCartClick, cartCount, onNavigate }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+
+  const handleNav = (path) => {
+    setMenuOpen(false);
+    onNavigate(path);
+  };
 
   return (
     <nav className="navbar-global">
-      <div className="left" onClick={() => setOpen(!open)}>
-        CSS GLOBAL <FiChevronDown />
-        {open && (
-          <div className="dropdown">
-            <ul>
-              <li><Link to="/modules">CSS Modules</Link></li>
-              <li><Link to="/tailwind">TailwindCSS</Link></li>
-              <li><Link to="/styled">Styled Components</Link></li>
-            </ul>
-          </div>
-        )}
+      <div className="left">
+        <a className="brand-name">CSS GLOBAL</a>
       </div>
-      <div className="center">
-        <Link to="/global/produtos">Produtos</Link>
-        <Link to="/global/promocao">Promoção</Link>
+
+      <div className="center desktop-menu">
+        <a onClick={() => handleNav("/")}>Tailwind</a>
+        <a onClick={() => handleNav("/modules")}>CSS Modules</a>
+        <a onClick={() => handleNav("/styled")}>Styled Components</a>
       </div>
+
       <div className="right">
-        <FiMoon />
-        <FiShoppingCart />
+        <button onClick={toggleTheme} className="icon-button">
+          {isDarkMode ? <FiSun /> : <FiMoon />}
+        </button>
+        <div onClick={onCartClick} className="icon-button cart-icon">
+          <FiShoppingCart />
+          {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+        </div>
+        <button
+          className="icon-button menu-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <FiX /> : <FiMenu />}
+        </button>
       </div>
+
+      {menuOpen && (
+        <div className="navbar-mobile-menu">
+          <button onClick={() => handleNav("/")}>Tailwind</button>
+          <button onClick={() => handleNav("/modules")}>CSS Modules</button>
+          <button onClick={() => handleNav("/styled")}>Styled Components</button>
+        </div>
+      )}
     </nav>
   );
 }
 
-export default NavbarGlobal;
+export default Navbar;

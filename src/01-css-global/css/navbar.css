@@ -1,25 +1,117 @@
 .navbar-global {
-  background: #60a5fa; /* azul claro */
-  padding: 12px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
-}
-
-.navbar-global .center a {
-  margin: 0 12px;
-  color: white;
-  text-decoration: none;
+  padding: 12px 24px;
+  background-color: var(--card-border);
+  color: var(--text);
   position: relative;
 }
 
-.navbar-global .center a:hover::after {
+.left {
+  flex: 1;
+}
+
+.brand-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  align-items: center;
+}
+
+.desktop-menu a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  cursor: pointer;
+}
+
+.desktop-menu a:hover::after {
   content: "";
   position: absolute;
   width: 100%;
   height: 2px;
   left: 0;
   bottom: -4px;
-  background: white;
+  background: var(--text);
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.cart-icon {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  font-size: 0.7rem;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.navbar-mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--card-border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+}
+
+.navbar-mobile-menu button {
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  color: var(--text);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .center {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
 }
