@@ -3,33 +3,43 @@
 
 @tailwind utilities;
 @import "tailwindcss-animated";
-@layer utilities {
-  @keyframes fade-in {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
 
-  @keyframes slide-in {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+body * {
+  @apply transition-colors duration-400;
+}
 
-  .animate-fade-in {
-    animation: fade-in 0.5s ease-out forwards;
-  }
+.stroke-snake {
+  stroke-dasharray: 30 274;
+  stroke-dashoffset: 0;
+  animation:
+    snake-move 2s linear infinite,
+    snake-color 2s linear infinite;
+}
 
-  .animate-slide-in {
-    animation: slide-in 0.7s ease-out forwards;
+@keyframes snake-move {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -304;
+  }
+}
+
+@keyframes snake-color {
+  0% {
+    stroke: #3B82F6; 
+  }
+  25% {
+    stroke: #10B981; 
+  }
+  50% {
+    stroke: #F59E0B; 
+  }
+  75% {
+    stroke: #EF4444; 
+  }
+  100% {
+    stroke: #3B82F6;
   }
 }
 

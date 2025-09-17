@@ -1,3 +1,11 @@
+:root {
+  --bg-mobile-menu: #4f46e5;
+  --bg-light: #309741;
+  --color-light: #ffffff;
+  --bg-dark: #4B0C1B;
+  --color-dark: white;
+}
+
 .navbar {
   display: flex;
   align-items: center;
@@ -64,7 +72,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background-color: #4f46e5;
+  background-color: var(--bg-mobile-menu);
   padding: 16px;
   position: absolute;
   top: 100%;
@@ -82,13 +90,12 @@
   }
 }
 
-/* Tema claro */
 .light {
-  background-color: #e5e7eb;
-  color: #111827;
+  background-color: var(--bg-light);
+  color: var(--color-light);
 }
 
 .dark {
-  background-color: #1f2937;
-  color: white;
+  background-color: var(--bg-dark);
+  color: var(--color-dark);
 }

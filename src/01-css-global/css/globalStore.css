@@ -1,14 +1,15 @@
 :root {
-  --bg: #f3f4f6;
-  --text: #111827;
-  --danger: #ef4444;
+  --bg: #f6f5f8;
+  --text: #2a0a3e;
+  --danger: #d2691e;
 }
 
 body.dark {
-  --bg: #1f2937;
-  --text: #f9fafb;
-  --danger: #f87171;
+  --bg: #2a0a3e;
+  --text: #ede9f3;
+  --danger: #f4a261;
 }
+
 .global-store-main {
   background-color: var(--bg);
   color: var(--text);

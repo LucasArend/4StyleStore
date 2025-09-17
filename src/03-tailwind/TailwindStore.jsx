@@ -46,17 +46,17 @@ function TailwindStore({ onNavigate }) {
         cartCount={cart.length}
         onNavigate={onNavigate}
       />
-      <main className="p-6 bg-gray-100 dark:bg-gray-900 min-h-screen">
+      <main className="p-6 bg-zinc-50 dark:bg-gray-900 min-h-screen">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+          <h2 className="text-2xl font-bold text-zinc-900 dark:text-gray-100">
             {showCartOnly ? "Seu Carrinho" : "Produtos em Destaque"}
           </h2>
         </div>
         {showCartOnly && cart.length === 0 && (
-          <p className="text-red-500">Nenhum item no carrinho.</p>
+          <p className="text-red-600 dark:text-red-400">Nenhum item no carrinho.</p>
         )}
 
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {displayedProducts.map((product) => (
             <ProductCard
               key={product.id}

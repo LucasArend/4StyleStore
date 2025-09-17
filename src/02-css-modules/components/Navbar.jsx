@@ -14,19 +14,18 @@ function NavbarModules({ onCartClick, cartCount, onNavigate }) {
 
   return (
     <nav className={`${styles.navbar} ${isDarkMode ? styles.dark : styles.light}`}>
-      {/* Esquerda: Nome do estilo */}
+
       <div className={styles.left}>
         <span className={styles.brand}>CSS MODULES</span>
       </div>
 
-      {/* Centro: Links */}
       <div className={styles.center}>
         <button onClick={() => handleNav("/")} className={styles.link}>Tailwind</button>
         <button onClick={() => handleNav("/global")} className={styles.link}>CSS Global</button>
         <button onClick={() => handleNav("/styled")} className={styles.link}>Styled Components</button>
       </div>
 
-      {/* Direita: Ações */}
+
       <div className={styles.actions}>
         <button onClick={toggleTheme} className={styles.icon}>
           {isDarkMode ? <FiSun /> : <FiMoon />}
@@ -40,7 +39,7 @@ function NavbarModules({ onCartClick, cartCount, onNavigate }) {
         </button>
       </div>
 
-      {/* Menu mobile */}
+
       {menuOpen && (
         <div className={styles.mobileMenu}>
           <button onClick={() => handleNav("/global")}>CSS Global</button>

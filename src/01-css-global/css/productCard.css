@@ -1,12 +1,18 @@
 :root {
-  --card: #ffffff;
-  --card-border: #e5e7eb;
-  --text: #111827;
+  --card: #f9f5ff;
+  --card-border: #dcd3f0;
+  --text: #2a0a3e;
+
+  --btn-primary: #6c3faf;
+  --btn-primary-hover: #7d4ec2;
+
+  --btn-remove: #d2691e;
+  --btn-remove-hover: #e27830;
 }
 
 .dark {
-  --card: #111827;
-  --card-border: #374151;
+  --card: #361046;
+  --card-border: #74212e;
   --text: #f9fafb;
 }
 
@@ -45,17 +51,17 @@
 }
 
 .buy-btn {
-  background-color: #4f46e5;
+  background-color: var(--btn-primary);
 }
 
 .buy-btn:hover {
-  background-color: #4338ca;
+  background-color: var(--btn-primary-hover);
 }
 
 .remove-btn {
-  background-color: #ef4444;
+  background-color: var(--btn-remove);
 }
 
 .remove-btn:hover {
-  background-color: #dc2626;
+  background-color: var(--btn-remove-hover);
 }

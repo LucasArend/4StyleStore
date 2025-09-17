@@ -20,20 +20,20 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [animationStage, setAnimationStage] = useState("idle"); // idle | entering | waiting | exiting
+  const [animationStage, setAnimationStage] = useState("idle"); 
   const [nextPath, setNextPath] = useState(null);
   const [message, setMessage] = useState("");
-  const [showRoutes, setShowRoutes] = useState(true); // controla quando as rotas devem aparecer
+  const [showRoutes, setShowRoutes] = useState(true);
 
   const handleNavigation = (path) => {
     if (location.pathname === path) return;
     setMessage(messages[path] || "Carregando...");
     setNextPath(path);
     setAnimationStage("entering");
-    setShowRoutes(false); // esconde conteúdo original
+    setShowRoutes(false); 
   };
 
-  // Entrada
+
   useEffect(() => {
     if (animationStage === "entering") {
       const timeout = setTimeout(() => {
@@ -44,7 +44,7 @@ function App() {
     }
   }, [animationStage, nextPath, navigate]);
 
-  // Espera após navegação
+
   useEffect(() => {
     if (animationStage === "waiting") {
       const timeout = setTimeout(() => {
@@ -54,13 +54,13 @@ function App() {
     }
   }, [animationStage]);
 
-  // Saída
+
   useEffect(() => {
     if (animationStage === "exiting") {
       const timeout = setTimeout(() => {
         setAnimationStage("idle");
         setNextPath(null);
-        setShowRoutes(true); // mostra as rotas novamente
+        setShowRoutes(true); 
       }, 500);
       return () => clearTimeout(timeout);
     }
@@ -77,7 +77,7 @@ function App() {
         />
       )}
 
-      {/* Se estiver animando, mostra o skeleton; senão, mostra a rota */}
+
       {showRoutes ? (
         <Routes location={location}>
           <Route path="/" element={<TailwindStore onNavigate={handleNavigation} />} />

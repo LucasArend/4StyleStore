@@ -1,8 +1,14 @@
+:root {
+  --bg-main: #f3f4f6;
+  --color-main: #111827;
+  --color-empty: #ef4444;
+}
+
 .main {
   padding: 24px;
   min-height: 100vh;
-  background-color: #f3f4f6; /* cinza claro */
-  color: #111827; /* cinza escuro */
+  background-color: var(--bg-main);
+  color: var(--color-main);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -19,7 +25,7 @@
 }
 
 .empty {
-  color: #ef4444; /* vermelho */
+  color: var(--color-empty);
   font-weight: 500;
 }
 
@@ -30,10 +36,10 @@
 }
 
 :global(.dark) .main {
-  background-color: #1f2937; /* cinza escuro */
-  color: #f9fafb; /* branco quase puro */
+  background-color: #1B0C11; 
+  color: #f9fafb; 
 }
 
 :global(.dark) .empty {
-  color: #f87171; /* vermelho claro no dark */
+  color: #f87171; 
 }

@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
+// Café escuro e latte
 const Card = styled.div`
-  background: ${(props) => (props.isDarkMode ? "#1f2937" : "white")}; 
-  color: ${(props) => (props.isDarkMode ? "#d1d5db" : "#1f2937")}; 
+  background: ${(props) => (props.isDarkMode ? "#3B261C" : "white")};
+  color: ${(props) => (props.isDarkMode ? "#f3e8e3" : "#1f2937")};
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -12,14 +13,14 @@ const Card = styled.div`
 
   &:hover {
     transform: translateY(-4px);
-    border-color: #6366f1; 
+    border-color: #d6a675; // caramelo
   }
 
   ${(props) =>
     props.inCart &&
     `
-    border-color: #10b981; /* emerald-500 */
-    background-color: ${props.isDarkMode ? "#064e3b" : "#ecfdf5"};
+    border-color: #B8563A;
+    background-color: ${props.isDarkMode ? "#5a372d" : "#fff0ec"};
   `}
 `;
 
@@ -34,7 +35,7 @@ const Image = styled.img`
 const Title = styled.div`
   font-size: 1.1rem;
   font-weight: 600;
-  color: ${(props) => (props.isDarkMode ? "#d1d5db" : "#1f2937")};
+  color: ${(props) => (props.isDarkMode ? "#f3e8e3" : "#1f2937")};
   margin-bottom: 8px;
   text-align: center;
 `;
@@ -44,13 +45,16 @@ const Button = styled.button`
   max-width: 220px;
   padding: 10px;
   background-color: ${(props) =>
-    props.inCart ? "#dc2626" : props.isDarkMode ? "#4338ca" : "#4f46e5"};
+    props.inCart
+      ? "#B8563A"
+      : props.isDarkMode
+      ? "#A9745B"
+      : "#4f46e5"};
   color: white;
   border: none;
   border-radius: 6px;
   font-weight: 500;
   transition: background-color 0.2s ease;
-
   white-space: nowrap;
   min-height: 38px;
   text-align: center;
@@ -60,7 +64,11 @@ const Button = styled.button`
 
   &:hover {
     background-color: ${(props) =>
-      props.inCart ? "#b91c1c" : props.isDarkMode ? "#3730a3" : "#4338ca"};
+      props.inCart
+        ? "#993924"
+        : props.isDarkMode
+        ? "#8B5E46"
+        : "#4338ca"};
   }
 `;
 

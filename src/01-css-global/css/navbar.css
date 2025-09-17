@@ -1,9 +1,23 @@
+:root {
+  --navbar-bg: #edecf3;          /* Fundo claro lilás */
+  --navbar-hover: #d8b4fe;       /* Hover claro */
+  --text: #2a0a3e;               /* Texto escuro */
+  --cart-badge: #e27830;         /* Laranja para destaque */
+}
+
+body.dark {
+  --navbar-bg: #3a1452;          /* Fundo escuro */
+  --navbar-hover: #541a74;       /* Hover escuro */
+  --text: #f9fafb;               /* Texto claro */
+  --cart-badge: #f4a261;         /* Laranja suave */
+}
+
 .navbar-global {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 12px 24px;
-  background-color: var(--card-border);
+  background-color: var(--navbar-bg);
   color: var(--text);
   position: relative;
 }
@@ -70,7 +84,7 @@
   position: absolute;
   top: -8px;
   right: -10px;
-  background-color: red;
+  background-color: var(--cart-badge);
   color: white;
   font-size: 0.7rem;
   width: 18px;
@@ -90,7 +104,7 @@
   top: 100%;
   left: 0;
   width: 100%;
-  background-color: var(--card-border);
+  background-color: var(--navbar-hover);
   display: flex;
   flex-direction: column;
   gap: 12px;

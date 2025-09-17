@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { FiMoon, FiSun, FiShoppingCart, FiMenu, FiX } from "react-icons/fi";
 import { ThemeContext } from "../../context/ThemeContext";
 import "../css/Navbar.css";
@@ -6,6 +6,11 @@ import "../css/Navbar.css";
 function Navbar({ onCartClick, cartCount, onNavigate }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    // Aplica a classe dark ao body para que CSS funcione corretamente
+    document.body.classList.toggle("dark", isDarkMode);
+  }, [isDarkMode]);
 
   const handleNav = (path) => {
     setMenuOpen(false);
@@ -15,7 +20,9 @@ function Navbar({ onCartClick, cartCount, onNavigate }) {
   return (
     <nav className="navbar-global">
       <div className="left">
-        <a className="brand-name">CSS GLOBAL</a>
+        <a className="brand-name" onClick={() => handleNav("/")}>
+          CSS GLOBAL
+        </a>
       </div>
 
       <div className="center desktop-menu">
@@ -25,16 +32,17 @@ function Navbar({ onCartClick, cartCount, onNavigate }) {
       </div>
 
       <div className="right">
-        <button onClick={toggleTheme} className="icon-button">
+        <button onClick={toggleTheme} className="icon-button" aria-label="Toggle Theme">
           {isDarkMode ? <FiSun /> : <FiMoon />}
         </button>
-        <div onClick={onCartClick} className="icon-button cart-icon">
+        <div onClick={onCartClick} className="icon-button cart-icon" aria-label="Cart">
           <FiShoppingCart />
           {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
         </div>
         <button
           className="icon-button menu-toggle"
           onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle Menu"
         >
           {menuOpen ? <FiX /> : <FiMenu />}
         </button>

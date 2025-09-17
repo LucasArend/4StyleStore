@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
 import styled from "styled-components";
-import Navbar from "./components/Navbar"; 
+import Navbar from "./components/Navbar";
 import ProductCard from "./components/ProductCard";
-import { ThemeContext } from "../context/ThemeContext"; 
+import { ThemeContext } from "../context/ThemeContext";
 
 import cafeGelado from "../assets/cafe/cafe-gelado.jpg";
 import cafeGlobinho from "../assets/cafe/cafe-globinho.jpg";
@@ -21,8 +21,8 @@ const products = [
 ];
 
 const Main = styled.main`
-  background-color: ${({ isDarkMode }) => (isDarkMode ? "#111827" : "#f9fafb")};
-  color: ${({ isDarkMode }) => (isDarkMode ? "#d1d5db" : "#111827")};
+  background-color: ${({ isDarkMode }) => (isDarkMode ? "#2C1A14" : "#f9fafb")};
+  color: ${({ isDarkMode }) => (isDarkMode ? "#f3e8e3" : "#111827")};
   min-height: 100vh;
   padding: 2rem;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -40,6 +40,7 @@ const Title = styled.h2`
 const EmptyMessage = styled.p`
   margin-top: 0.5rem;
   font-style: italic;
+  color: ${({ isDarkMode }) => (isDarkMode ? "#d9886a" : "#dc2626")};
 `;
 
 const ProductsGrid = styled.div`
@@ -87,7 +88,9 @@ function StyledStore({ onNavigate }) {
         <Header>
           <Title>{showCartOnly ? "Seu Carrinho" : "Produtos em Destaque"}</Title>
           {showCartOnly && cart.length === 0 && (
-            <EmptyMessage>Nenhum item no carrinho.</EmptyMessage>
+            <EmptyMessage isDarkMode={isDarkMode}>
+              Nenhum item no carrinho.
+            </EmptyMessage>
           )}
         </Header>
 

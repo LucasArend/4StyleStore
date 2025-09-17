@@ -3,8 +3,12 @@ import { FiMoon, FiSun, FiShoppingCart, FiMenu, FiX } from "react-icons/fi";
 import { ThemeContext } from "../../context/ThemeContext";
 import styled from "styled-components";
 
+// Cores café
+const NAV_DARK = "#3B261C";       // Marrom escuro
+const NAV_LIGHT = "#A9745B";      // Latte
+
 const Nav = styled.nav`
-  background-color: ${({ isDarkMode }) => (isDarkMode ? "#1f2937" : "#4f46e5")};
+  background-color: ${({ isDarkMode }) => (isDarkMode ? NAV_DARK : NAV_LIGHT)};
   color: white;
   padding: 16px 24px;
   display: flex;
@@ -27,7 +31,7 @@ const Links = styled.div`
   gap: 24px;
 
   @media (max-width: 768px) {
-    display: none; /* Esconde links em telas pequenas */
+    display: none;
   }
 `;
 
@@ -60,7 +64,7 @@ const Actions = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  min-width: 120px; /* garante espaço mesmo quando menu escondido */
+  min-width: 120px;
   gap: 16px;
 `;
 
@@ -72,7 +76,6 @@ const IconButton = styled.button`
   cursor: pointer;
 `;
 
-// MenuIcon só aparece em telas pequenas
 const MenuIcon = styled(IconButton)`
   display: none;
 
@@ -85,7 +88,7 @@ const MobileMenu = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background-color: #4f46e5;
+  background-color: ${({ isDarkMode }) => (isDarkMode ? "#4A3024" : "#B5836F")};
   padding: 16px;
   position: absolute;
   top: 100%;
@@ -94,8 +97,8 @@ const MobileMenu = styled.div`
   z-index: 10;
 `;
 
-function NavbarStyled({ onCartClick, cartCount, onNavigate }) {
-  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+function NavbarStyled({ onCartClick, cartCount, onNavigate, isDarkMode }) {
+  const { toggleTheme } = useContext(ThemeContext);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleNav = (path) => {
@@ -105,13 +108,12 @@ function NavbarStyled({ onCartClick, cartCount, onNavigate }) {
 
   return (
     <Nav isDarkMode={isDarkMode}>
-      <Title>STYLED COMPONENTS</Title>
+      <Title>CAFÉ STORE</Title>
 
       <Links>
         <LinkButton onClick={() => handleNav("/")}>Tailwind</LinkButton>
         <LinkButton onClick={() => handleNav("/global")}>CSS Global</LinkButton>
         <LinkButton onClick={() => handleNav("/modules")}>CSS Modules</LinkButton>
-        
       </Links>
 
       <Actions>
@@ -127,7 +129,7 @@ function NavbarStyled({ onCartClick, cartCount, onNavigate }) {
                 position: "absolute",
                 top: "-8px",
                 right: "-8px",
-                backgroundColor: "red",
+                backgroundColor: "#d97706", // amarelo café
                 color: "white",
                 fontSize: "0.7rem",
                 width: "18px",
@@ -149,10 +151,10 @@ function NavbarStyled({ onCartClick, cartCount, onNavigate }) {
       </Actions>
 
       {menuOpen && (
-        <MobileMenu>
+        <MobileMenu isDarkMode={isDarkMode}>
+          <button onClick={() => handleNav("/")}>Tailwind</button>
           <button onClick={() => handleNav("/global")}>CSS Global</button>
           <button onClick={() => handleNav("/modules")}>CSS Modules</button>
-          <button onClick={() => handleNav("/styled")}>Styled Components</button>
         </MobileMenu>
       )}
     </Nav>
