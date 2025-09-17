@@ -2,13 +2,20 @@ import { useState } from "react";
 import NavbarTailwind from "./components/Navbar";
 import ProductCard from "./components/ProductCard";
 
+import divinity2 from "../assets/jogos/divinity2.png";
+import eldenRing from "../assets/jogos/EldenRingNightreing.png";
+import expedition33 from "../assets/jogos/Expedition33.png";
+import helldivers2 from "../assets/jogos/helldiversII.png";
+import hollowKnight from "../assets/jogos/hollowknight.png";
+import noita from "../assets/jogos/Noita.png";
+
 const products = [
-  { id: 1, title: "Produto 1", image: "https://via.placeholder.com/300x200" },
-  { id: 2, title: "Produto 2", image: "https://via.placeholder.com/300x200" },
-  { id: 3, title: "Produto 3", image: "https://via.placeholder.com/300x200" },
-  { id: 4, title: "Produto 4", image: "https://via.placeholder.com/300x200" },
-  { id: 5, title: "Produto 5", image: "https://via.placeholder.com/300x200" },
-  { id: 6, title: "Produto 6", image: "https://via.placeholder.com/300x200" },
+  { id: 1, title: "Divinity: Original Sin 2", preco: "R$ 90,00", image: divinity2 },
+  { id: 2, title: "Elden Ring", preco: "R$ 250,00", image: eldenRing },
+  { id: 3, title: "Expedition 33", preco: "R$ 200,00", image: expedition33 },
+  { id: 4, title: "Helldivers II", preco: "R$ 199,00", image: helldivers2 },
+  { id: 5, title: "Hollow Knight", preco: "R$ 46,00", image: hollowKnight },
+  { id: 6, title: "Noita", preco: "R$ 38,00", image: noita },
 ];
 
 function TailwindStore({ onNavigate }) {
@@ -54,6 +61,7 @@ function TailwindStore({ onNavigate }) {
             <ProductCard
               key={product.id}
               title={product.title}
+              preco={product.preco}
               image={product.image}
               inCart={cart.some((item) => item.id === product.id)}
               onToggleCart={() => toggleCartProduct(product)}

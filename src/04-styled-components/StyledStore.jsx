@@ -4,13 +4,20 @@ import Navbar from "./components/Navbar";
 import ProductCard from "./components/ProductCard";
 import { ThemeContext } from "../context/ThemeContext"; 
 
+import cafeGelado from "../assets/cafe/cafe-gelado.jpg";
+import cafeGlobinho from "../assets/cafe/cafe-globinho.jpg";
+import cafeTurco from "../assets/cafe/cafe-turco.jpg";
+import chemex from "../assets/cafe/chemex.jpg";
+import cleverDripper from "../assets/cafe/clever-dripper.jpg";
+import harioV60 from "../assets/cafe/hario-v60.jpg";
+
 const products = [
-  { id: 1, title: "Produto 1", image: "https://via.placeholder.com/300x200" },
-  { id: 2, title: "Produto 2", image: "https://via.placeholder.com/300x200" },
-  { id: 3, title: "Produto 3", image: "https://via.placeholder.com/300x200" },
-  { id: 4, title: "Produto 4", image: "https://via.placeholder.com/300x200" },
-  { id: 5, title: "Produto 5", image: "https://via.placeholder.com/300x200" },
-  { id: 6, title: "Produto 6", image: "https://via.placeholder.com/300x200" },
+  { id: 1, title: "Café Gelado", preco: "R$ 15,00", image: cafeGelado },
+  { id: 2, title: "Café Globinho", preco: "R$ 12,00", image: cafeGlobinho },
+  { id: 3, title: "Café Turco", preco: "R$ 18,00", image: cafeTurco },
+  { id: 4, title: "Chemex (coador)", preco: "R$ 250,00", image: chemex },
+  { id: 5, title: "Clever Dripper", preco: "R$ 180,00", image: cleverDripper },
+  { id: 6, title: "Hario V60", preco: "R$ 120,00", image: harioV60 },
 ];
 
 const Main = styled.main`
@@ -89,6 +96,7 @@ function StyledStore({ onNavigate }) {
             <ProductCard
               key={product.id}
               title={product.title}
+              preco={product.preco}
               image={product.image}
               inCart={cart.some((item) => item.id === product.id)}
               onToggleCart={() => toggleCartProduct(product)}

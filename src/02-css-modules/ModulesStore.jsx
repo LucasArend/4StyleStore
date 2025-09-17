@@ -4,13 +4,20 @@ import styles from "./css/ModulesStore.module.css";
 import ProductCard from "./components/ProductCard";
 import { ThemeContext } from "../context/ThemeContext";
 
+import aTorreNegra from "../assets/livros/a-torre-negra-volumeVII.jpg";
+import asCronicasDeNarnia from "../assets/livros/AsCronicasDeNarnia.jpg";
+import eoVentoLevou from "../assets/livros/EoVentoLevou.jpg";
+import guerraDosTronos from "../assets/livros/GuerraDosTronosLivro1.jpg";
+import harryPotter1 from "../assets/livros/HarryPottereApedraFilosofal.jpg";
+import olaDoRadeRaios from "../assets/livros/oladraoderaios-eosolimpianos.jpg";
+
 const products = [
-  { id: 1, title: "Produto 1", image: "https://via.placeholder.com/300x200" },
-  { id: 2, title: "Produto 2", image: "https://via.placeholder.com/300x200" },
-  { id: 3, title: "Produto 3", image: "https://via.placeholder.com/300x200" },
-  { id: 4, title: "Produto 4", image: "https://via.placeholder.com/300x200" },
-  { id: 5, title: "Produto 5", image: "https://via.placeholder.com/300x200" },
-  { id: 6, title: "Produto 6", image: "https://via.placeholder.com/300x200" },
+  { id: 1, title: "A Torre Negra - Volume VII", preco: "R$ 59,90", image: aTorreNegra },
+  { id: 2, title: "As Crônicas de Nárnia", preco: "R$ 89,90", image: asCronicasDeNarnia },
+  { id: 3, title: "E o Vento Levou", preco: "R$ 69,90", image: eoVentoLevou },
+  { id: 4, title: "Guerra dos Tronos - Livro 1", preco: "R$ 79,90", image: guerraDosTronos },
+  { id: 5, title: "Harry Potter e a Pedra Filosofal", preco: "R$ 49,90", image: harryPotter1 },
+  { id: 6, title: "Percy Jackson e o Ladrão de Raios", preco: "R$ 54,90", image: olaDoRadeRaios },
 ];
 
 function ModulesStore({ onNavigate }) {
@@ -61,6 +68,7 @@ function ModulesStore({ onNavigate }) {
             <ProductCard
               key={product.id}
               title={product.title}
+              preco={product.preco}
               image={product.image}
               inCart={cart.some(item => item.id === product.id)}
               onToggleCart={() => toggleCartProduct(product)}

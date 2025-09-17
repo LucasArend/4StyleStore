@@ -25,7 +25,7 @@ const Card = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  height: 160px;
+  height: 360px;
   object-fit: cover;
   border-radius: 6px;
   margin-bottom: 12px;
@@ -41,7 +41,7 @@ const Title = styled.div`
 
 const Button = styled.button`
   width: 100%;
-  max-width: 220px; /* largura fixa aproximada para o maior texto */
+  max-width: 220px;
   padding: 10px;
   background-color: ${(props) =>
     props.inCart ? "#dc2626" : props.isDarkMode ? "#4338ca" : "#4f46e5"};
@@ -64,11 +64,12 @@ const Button = styled.button`
   }
 `;
 
-function ProductCard({ title, image, inCart, onToggleCart, isDarkMode }) {
+function ProductCard({ title, image, preco, inCart, onToggleCart, isDarkMode }) {
   return (
     <Card inCart={inCart} isDarkMode={isDarkMode} onClick={onToggleCart}>
       <Image src={image} alt={title} />
       <Title isDarkMode={isDarkMode}>{title}</Title>
+      <Title isDarkMode={isDarkMode}>{preco}</Title>
       <Button inCart={inCart} isDarkMode={isDarkMode}>
         {inCart ? "Remover do Carrinho" : "Adicionar ao Carrinho"}
       </Button>

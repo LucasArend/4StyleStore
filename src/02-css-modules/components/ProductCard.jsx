@@ -1,6 +1,6 @@
 import styles from "../css/ProductCard.module.css";
 
-function ProductCard({ title, image, inCart, onToggleCart }) {
+function ProductCard({ title, image, inCart,preco, onToggleCart }) {
   return (
     <div
       className={`${styles.card} ${inCart ? styles.inCart : ""}`}
@@ -8,6 +8,7 @@ function ProductCard({ title, image, inCart, onToggleCart }) {
     >
       <img src={image} alt={title} className={styles.image} />
       <div className={styles.title}>{title}</div>
+      <div className={styles.title}>{preco}</div>
       <button
         className={`${styles.button} ${inCart ? styles.removeButton : ""}`}
       >
