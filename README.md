@@ -105,10 +105,10 @@ Cada versão possui uma paleta personalizada para **Light/Dark Mode**:
 
 | Estilo              | Tema Light                   | Tema Dark                      |
 |---------------------|------------------------------|--------------------------------|
-| TailwindCSS         | Roxo / Índigo (padrão TW)    | Roxo escuro / Cinza            |
-| CSS Global          | Azul claro                   | Azul escuro / Cinza profundo   |
-| CSS Modules         | Verde claro                  | Verde escuro / Preto           |
-| Styled Components   | Cinza claro / Minimalista    | Cinza escuro / Grafite         |
+| TailwindCSS         | Índigo (padrão TW)           | Cinza                          |
+| CSS Global          | Pale cyan                    | Violeta / Mellow Orange        |
+| CSS Modules         | Sea Green                    | Dark shadow red                |
+| Styled Components   | Dark moderate orange         | Earthy brown                   |
 
 ---
 
