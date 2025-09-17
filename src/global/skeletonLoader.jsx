@@ -19,17 +19,16 @@ function SkeletonLoader() {
               className="bg-white dark:bg-gray-800 rounded shadow p-4 flex flex-col justify-between"
             >
               <div>
-                {/* Imagem fake */}
+
                 <div className="h-[380px] bg-gray-300 dark:bg-gray-700 rounded mb-4" />
 
-                {/* Título fake */}
                 <div className="h-5 w-3/4 bg-gray-300 dark:bg-gray-700 rounded mb-2" />
 
-                {/* Preço fake */}
+
                 <div className="h-5 w-1/2 bg-gray-300 dark:bg-gray-700 rounded" />
               </div>
 
-              {/* Botão fake */}
+
               <div className="h-10 mt-6 bg-gray-300 dark:bg-gray-700 rounded" />
             </div>
           ))}

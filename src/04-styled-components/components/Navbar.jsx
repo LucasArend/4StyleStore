@@ -108,7 +108,7 @@ function NavbarStyled({ onCartClick, cartCount, onNavigate, isDarkMode }) {
 
   return (
     <Nav isDarkMode={isDarkMode}>
-      <Title>CAFÉ STORE</Title>
+      <Title>STYLED COMPONENTS</Title>
 
       <Links>
         <LinkButton onClick={() => handleNav("/")}>Tailwind</LinkButton>
@@ -129,7 +129,7 @@ function NavbarStyled({ onCartClick, cartCount, onNavigate, isDarkMode }) {
                 position: "absolute",
                 top: "-8px",
                 right: "-8px",
-                backgroundColor: "#d97706", // amarelo café
+                backgroundColor: "#d97706", 
                 color: "white",
                 fontSize: "0.7rem",
                 width: "18px",
